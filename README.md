@@ -1,6 +1,6 @@
 # Utils
 
-To use this library, Follow this steps :
+To use this library, follow these steps :
 
 Step 1. Add the JitPack repository to your build file
 
