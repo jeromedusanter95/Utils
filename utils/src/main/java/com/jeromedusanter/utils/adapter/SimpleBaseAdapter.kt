@@ -8,18 +8,22 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jeromedusanter.utils.BR
 
 abstract class SimpleBaseAdapter<B : ViewDataBinding, T : BaseItem>(
     private var listener: Listener? = null,
-) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback<T>()) {
+) : ListAdapter<T, SimpleBaseAdapter.ViewHolder>(DiffCallback<T>()) {
 
     abstract val resId: Int
 
-    abstract fun setVariable(item: T)
+    /**
+     * Should be BR.item from your app
+     */
+    abstract val variableId: Int
 
     override fun getItemCount(): Int = currentList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = DataBindingUtil.inflate<B>(
             LayoutInflater.from(parent.context),
             resId,
@@ -29,9 +33,9 @@ abstract class SimpleBaseAdapter<B : ViewDataBinding, T : BaseItem>(
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = currentList[position]
-        setVariable(item)
+        holder.binding.setVariable(variableId, item)
         holder.itemView.setOnClickListener { listener?.onClickItem(item.id) }
     }
 
@@ -42,7 +46,7 @@ abstract class SimpleBaseAdapter<B : ViewDataBinding, T : BaseItem>(
         override fun areContentsTheSame(oldItem: T, newItem: T) = oldItem == newItem
     }
 
-    class ViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface Listener {
         fun onClickItem(itemId: Int)
