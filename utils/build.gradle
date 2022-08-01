@@ -50,3 +50,17 @@ dependencies {
     //-- WorkerManager --//
     implementation "androidx.work:work-runtime-ktx:2.7.1"
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.jeromedusanter95'
+                artifactId = 'Utils'
+                version = '1.0.0'
+            }
+        }
+    }
+}
