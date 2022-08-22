@@ -27,3 +27,14 @@ suspend fun <T> tryOrNull(
         null
     }
 }
+
+suspend fun <T> tryCatch(
+    coroutineScope: CoroutineScope,
+    block: suspend CoroutineScope.() -> T,
+) {
+    try {
+        block.invoke(coroutineScope)
+    } catch (t: Throwable) {
+        t.printStackTrace()
+    }
+}
