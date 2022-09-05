@@ -16,5 +16,5 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.jeromedusanter95:Utils:1.0.1'
+	        implementation 'com.github.jeromedusanter95:Utils:1.0.3'
 	}
