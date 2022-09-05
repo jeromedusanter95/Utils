@@ -16,24 +16,22 @@ suspend inline fun <T> suspendCoroutineWithTimeout(
     return finalValue
 }
 
-suspend fun <T> tryOrNull(
-    coroutineScope: CoroutineScope,
+suspend fun <T> CoroutineScope.tryOrNull(
     block: suspend CoroutineScope.() -> T,
 ): T? {
     return try {
-        block.invoke(coroutineScope)
+        block.invoke(this)
     } catch (t: Throwable) {
         t.printStackTrace()
         null
     }
 }
 
-suspend fun <T> tryCatch(
-    coroutineScope: CoroutineScope,
+suspend fun <T> CoroutineScope.tryCatch(
     block: suspend CoroutineScope.() -> T,
 ) {
     try {
-        block.invoke(coroutineScope)
+        block.invoke(this)
     } catch (t: Throwable) {
         t.printStackTrace()
     }
