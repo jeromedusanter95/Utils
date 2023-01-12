@@ -10,9 +10,9 @@ android {
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
-        versionCode 4
-        versionName "1.0.3"
+        targetSdk 28
+        versionCode 5
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,7 +59,7 @@ afterEvaluate {
 
                 groupId = 'com.github.jeromedusanter95'
                 artifactId = 'Utils'
-                version = '1.0.3'
+                version = '1.0.4'
             }
         }
     }
